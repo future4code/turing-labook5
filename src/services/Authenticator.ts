@@ -4,8 +4,7 @@ export class Authenticator {
   public generateToken(data: AuthenticationData): string {
     const token = jwt.sign(
       {
-        id: data.id,
-        email: data.email
+        id: data.id
       },
       process.env.JWT_KEY as string,
       {expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN as string}
@@ -24,6 +23,5 @@ export class Authenticator {
 }
 
 export interface AuthenticationData {
-  id: string,
-  email: string
+  id: string
 }

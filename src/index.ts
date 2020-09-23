@@ -4,6 +4,7 @@ import { AddressInfo } from "net";
 import { createUser } from "./endpoints/CreateUser";
 import { login } from './endpoints/Login'
 import { becomeFriends } from './endpoints/BecomeFriends'
+import { removeFriend } from './endpoints/RemoveFriend'
 
 dotenv.config();
 
@@ -33,4 +34,5 @@ app.get("/teste", async (req: Request, res: Response) => {
 
 app.put('/signup', createUser)
 app.post('/login', login)
-app.post('/user/becomeFriend', becomeFriends)
+app.post('/friendUser', becomeFriends)
+app.post('/unfriendUser', removeFriend)

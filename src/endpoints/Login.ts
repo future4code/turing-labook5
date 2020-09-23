@@ -27,12 +27,11 @@ export const login = async (req: Request, res: Response) => {
 
         const authenticator = new Authenticator()
         const token = authenticator.generateToken({
-          id:user.id,
-          email:user.email
+          id: user.id
         })
 
         res.status(200).send({
-            message: "Usuário logado com sucesso",
+            message: `Usuário logado com sucesso! Bem vindo(a) de volta, ${user.name}.`,
             token: token
         })
     } catch (error) {

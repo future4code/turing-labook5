@@ -4,16 +4,16 @@ import { UserDatabase } from "../data/UserDatabase";
 import { Authenticator } from "../services/Authenticator";
 import { FriendsDatabase } from "../data/FriendsDatabase";
 
-export const friendUser = async (req: Request, res: Response) => {
+export const becomeFriends = async (req: Request, res: Response) => {
     try {
         const token = req.headers.authorization as string
 
-        if (!req.body.userToFriendId && req.body.userToFriendId.length > 0){
-            throw new Error("Informe o id do usuário para adicionar como amigo")
+        const friendData = {
+          userToFriendId: req.body.userToFriendId
         }
 
-        const friendData = {
-            userToFriendId: req.body.userToFriendId
+        if (!req.body.userToFriendId && req.body.userToFriendId.length > 0){
+            throw new Error("Informe o id do usuário para fazer amizade.")
         }
 
         const authenticator = new Authenticator()
@@ -22,19 +22,20 @@ export const friendUser = async (req: Request, res: Response) => {
         const userDb = new UserDatabase()
         const userToFriend = await userDb.getUserById(friendData.userToFriendId)
 
-        const followingDb = new FollowingDatabase()
-        await followingDb.followUser(user.id, followingData.userToFollowId)
-
-        if(user.id === followingData.userToFollowId){
-            throw new Error("Você não pode seguir você mesmo.")
+        if(user.id === friendData.userToFriendId){
+          throw new Error(`Você não pode fazer uma amizade com você mesmo.`)
         }
 
+        const friendDb = new FriendsDatabase()
+        await friendDb.friendUser(user.id, friendData.userToFriendId)
+        await friendDb.friendUser(friendData.userToFriendId, user.id)
+
         res.status(200).send({
-            message: `Agora você está seguindo ${followingUser.name}.`
+            message: `Agora você tem uma amizade com ${userToFriend.name}`
         })
     } catch (error) {
         if(error.message.includes("PRIMARY")){
-            res.status(400).send({message: "Você já está seguindo esta pessoa!"})
+            res.status(400).send({message: `Você já tem uma amizade com essa pessoa.`})
         }
 
         res.status(400).send({message: error.message})

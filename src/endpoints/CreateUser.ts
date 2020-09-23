@@ -36,15 +36,17 @@ export const createUser = async (req: Request, res: Response) => {
 
         const authenticator = new Authenticator()
         const token = authenticator.generateToken({
-            id: newId,
-            email: userData.email
+            id: newId
         })
 
         res.status(200).send({
-            message: "Usuário cadastrado com sucesso! Você está agora logado",
+            message: `Usuário cadastrado com sucesso! Seja bem vindo(a), ${req.body.name}, você está agora logado(a).`,
             token: token
         })
     } catch (error) {
+      if(error.message.includes("ER_DUP_ENTRY")){
+        res.status(400).send({message: "Esse email já está cadastrado."})
+      }
         res.status(400).send({message: error.message})
     } finally {
         BaseDatabase.destroyConnection()
