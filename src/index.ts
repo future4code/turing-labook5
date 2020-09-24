@@ -5,6 +5,9 @@ import { createUser } from "./endpoints/CreateUser";
 import { login } from './endpoints/Login'
 import { becomeFriends } from './endpoints/BecomeFriends'
 import { removeFriend } from './endpoints/RemoveFriend'
+import { createPost } from './endpoints/CreatePost'
+import { viewFeed } from './endpoints/ViewFeed'
+import { viewFeedperType } from './endpoints/ViewFeedperType'
 
 dotenv.config();
 
@@ -36,3 +39,6 @@ app.put('/signup', createUser)
 app.post('/login', login)
 app.post('/friendUser', becomeFriends)
 app.post('/unfriendUser', removeFriend)
+app.post('/post', createPost)
+app.get('/feed', viewFeed)
+app.get('/feed/:type', viewFeedperType)
