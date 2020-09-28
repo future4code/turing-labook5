@@ -1,18 +1,14 @@
 import dayjs from "dayjs";
 import { Request, Response } from "express";
+import { PostBusiness } from "../business/PostBusiness";
 import { BaseDatabase } from "../data/BaseDatabase";
-import { UserDatabase } from "../data/UserDatabase";
-import { Authenticator } from "../services/Authenticator";
 
 export const viewFeed = async (req: Request, res: Response) => {
     try {
         const token = req.headers.authorization as string
 
-        const authenticator = new Authenticator()
-        const authData = authenticator.getData(token)
-
-        const userDatabase = new UserDatabase()
-        const feed = await userDatabase.getFeedById(authData.id)
+        const postsBusiness = new PostBusiness()
+        const feed = await postsBusiness.viewFeed(token)
 
         res.status(200).send({
             posts: feed.map((post: any) => {
