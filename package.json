@@ -1,0 +1,35 @@
+{
+  "name": "labook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node ./src/index.ts"
+  },
+  "keywords": [],
+  "author": "Guilherme Paiva",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "bcryptjs": "^2.4.3",
+    "dayjs": "^1.8.36",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.5",
+    "moment": "^2.29.0",
+    "mysql": "^2.18.1",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3",
+    "uuid": "^8.3.0"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/express": "^4.17.8",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/knex": "^0.16.1",
+    "@types/node": "^14.11.2",
+    "@types/uuid": "^8.3.0"
+  }
+}
