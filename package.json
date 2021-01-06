@@ -10,7 +10,7 @@
   "author": "Guilherme Paiva",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "dayjs": "^1.8.36",
     "dotenv": "^8.2.0",
